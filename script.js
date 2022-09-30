@@ -3,12 +3,17 @@ const check = document.querySelector('.check');
 const message = document.querySelector('.message');
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 const again = document.querySelector('.again');
+
+let body = document.querySelector('body');
+let number = document.querySelector('.number');
+let highscore = document.querySelector('.highscore');
+
 let score = 20;
 let highScore = 0;
 
 // Listen for guess
 check.addEventListener('click', function () {
-  const guess = Number(document.querySelector('.guess').value);
+  let guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
     // Player didn't choose a number
@@ -22,14 +27,14 @@ check.addEventListener('click', function () {
     // when player wins, display secret number
     document.querySelector('.number').textContent = secretNumber;
     // Change the background color when player wins
-    document.querySelector('body').style.backgroundColor = '#60b347';
-    document.querySelector('.number').style.width = '30rem';
+    body.style.backgroundColor = '#60b347';
+    number.style.width = '30rem';
     if (score > highScore) {
       highScore = score;
       if (highScore >= 18) {
-        document.querySelector('.highscore').textContent = highScore + `🔥`;
+        highscore.textContent = highScore + `🔥`;
       } else {
-        document.querySelector('.highscore').textContent = highScore + ' ';
+        highscore.textContent = highScore + ' ';
       }
     }
   }
@@ -64,12 +69,12 @@ again.addEventListener('click', function () {
   score = 20;
   document.querySelector('.score').textContent = score;
   // resets the background
-  document.querySelector('body').style.backgroundColor = '#222';
-  document.querySelector('.number').style.width = '15rem';
+  body.style.backgroundColor = '#222';
+  number.style.width = '15rem';
   message.textContent = 'Start guessing ...';
-  // Resets the guess
-  document.querySelector('.guess').value = '';
+
   // Resets the secret number
-  document.querySelector('.number').textContent = '?';
+  number.textContent = '?';
   secretNumber = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.guess').value = '';
 });
